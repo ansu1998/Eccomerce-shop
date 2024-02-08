@@ -1,0 +1,37 @@
+{% extends 'header.html' %}
+
+{% block title %}Product List - Your E-commerce Store{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container mt-4">
+    <br>
+    <h1 class="mb-4" style="color: blue;">Product Lists</h1>
+
+    {% if category %}
+    <div class="alert alert-info" role="alert">
+        <h2>Category: {{ category.name }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img style="height: 300px;" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/default_product.jpg' %}{% endif %}" class="card-img-top" alt="{{ product.name }} Image">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: blue; font-weight: bold; font-size: larger;">{{ product.name }}</h5>
+                    <p class="card-text" style="color: black; font-weight: bold; font-size: medium;">Price: {{ product.price }}</p>
+                    <a href="{% url 'product_detail' id=product.id slug=product.slug %}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'category_list' %}" class="btn btn-secondary">View All Categories</a>
+    </div>
+</div>
+{% endblock %}

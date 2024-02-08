@@ -1,0 +1,32 @@
+<!-- cart.html -->
+
+{% extends 'header.html' %}
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Your Cart</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <!-- Add more table headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for product_id in cart %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ product_id }}</td>
+                <!-- Retrieve product details here based on product_id -->
+                <td>{{ product.price }}</td>
+                <!-- Display other product details as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+</div>
+{% endblock %}

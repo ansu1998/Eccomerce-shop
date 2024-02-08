@@ -1,0 +1,57 @@
+{% extends 'header.html' %}
+
+{% block title %}
+    {{ product.name }} Detail - Your E-commerce Store
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="container border p-4">
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-image">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }} Image" class="img-fluid rounded">
+                </div>
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="product-details">
+                    <h1 class="display-4 text-primary">{{ product.name }}</h1>
+                    <br>
+                    <div class="description mb-4">
+                        <h2 class="text-dark">Description:</h2>
+                        <p class="text-muted">{{ product.descriptions }}</p>
+                    </div>
+                    <div class="price-stock">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h2 class="text-dark">Price:</h2>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="lead font-weight-bold text-dark">${{ product.price }}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h2 class="text-dark">Stock:</h2>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="lead font-weight-bold text-dark">{{ product.stock }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions mt-4">
+                        <form action="{% url 'add_to_cart' id=product.id slug=product.slug %}" method="post" class="d-inline">
+                        <!-- Add to Cart Button -->
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
